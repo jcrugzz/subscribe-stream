@@ -5,7 +5,9 @@ a specific `redis` [pub/sub][pubsub] channel using [`node_redis`][redis].
 
 __note__: We assume that it is a stringified json object coming through the
 pub/sub channel that is again parsed into an object because they are much nicer
-to deal with.
+to deal with. This can be seen in the example below.
+
+This makes it especially useful for consuming [`godot`][godot] data sent using the `redis` reactor.
 
 ## Example
 
@@ -32,6 +34,10 @@ client.publish('hithere', JSON.stringify(testObj));
 
 ```
 
+Which outputs:
+
+`obj { test: 'value', other: 'otherValue' }`
+
 ## Test
 
 `npm test`
@@ -40,6 +46,7 @@ client.publish('hithere', JSON.stringify(testObj));
 
 MIT
 
+[godot]: https://github.com/nodejitsu/godot
 [Readable]: http://nodejs.org/api/stream.html#stream_class_stream_readable
 [redis]: https://github.com/mranney/node_redis
 [pubsub]: https://github.com/mranney/node_redis#publish--subscribe

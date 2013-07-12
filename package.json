@@ -11,6 +11,7 @@
     "stream"
   ],
   "repository": {
+    "type": "git",
     "url": "git://github.com/jcrugzz/subscribe-stream.git"
   },
   "main": "index.js",

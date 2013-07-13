@@ -52,6 +52,12 @@ SubscribeStream.prototype._onPublish = function (channel, message) {
   this.push(JSON.parse(message));
 };
 
+SubscribeStream.prototype.close = function () {
+  this.redis.unsubscribe();
+  this.redis.end();
+  this.emit('close');
+};
+
 module.exports = function (options) {
   return new SubscribeStream(options);
 }

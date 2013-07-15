@@ -2,6 +2,8 @@
 
 [![build status](https://secure.travis-ci.org/jcrugzz/subscribe-stream.png)](http://travis-ci.org/jcrugzz/subscribe-stream)
 
+[![NPM](https://nodei.co/npm/subscribe-stream.png)](https://nodei.co/npm/subscribe-stream/)
+
 A simple [Readable][Readable] object stream that consumes the data published to
 a specific `redis` [pub/sub][pubsub] channel using [`node_redis`][redis].
 

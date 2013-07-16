@@ -53,9 +53,13 @@ SubscribeStream.prototype._onPublish = function (channel, message) {
 };
 
 SubscribeStream.prototype.close = function () {
+  var self = this;
+
   this.redis.unsubscribe();
-  this.redis.end();
-  this.emit('close');
+  this.redis.quit();
+  this.redis.on('end', function () {
+    self.emit('close');
+  });
 };
 
 module.exports = function (options) {

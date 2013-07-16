@@ -16,6 +16,8 @@ test('do we work?', function (t) {
 
   stream.on('readable', function () {
     var obj = stream.read();
+    client.end();
+    stream.close();
     t.deepEqual(obj, testObj);
   });
 

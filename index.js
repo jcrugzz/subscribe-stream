@@ -34,11 +34,7 @@ var SubscribeStream = function (options) {
   });
 
   if (this.password) {
-    this.redis.auth(this.password, function () {
-      //
-      // Remark: O hai there
-      //
-    });
+    this.redis.auth(this.password, noop);
   }
 
   this.redis.subscribe(this.subscription);

@@ -9,6 +9,9 @@ var util = require('util'),
     Readable = require('stream').Readable,
     redis = require('redis');
 
+if (Readable === undefined) {
+  Readable = require('readable-stream')
+}
 
 var SubscribeStream = function (options) {
   Readable.call(this, { objectMode: true });
@@ -64,4 +67,6 @@ SubscribeStream.prototype.close = function () {
 
 module.exports = function (options) {
   return new SubscribeStream(options);
-}
+};
+
+function noop() {}

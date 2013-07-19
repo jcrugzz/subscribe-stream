@@ -16,11 +16,13 @@ test('do we work?', function (t) {
 
   stream.on('readable', function () {
     var obj = stream.read();
+    t.deepEqual(obj, testObj);
     client.end();
     stream.close();
-    t.deepEqual(obj, testObj);
   });
 
-  client.publish('hithere', JSON.stringify(testObj));
+  setTimeout(function () {
+    client.publish('hithere', JSON.stringify(testObj));
+  }, 100);
 });
 

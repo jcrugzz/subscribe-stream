@@ -1,5 +1,6 @@
 var test = require('tape'),
     redis = require('redis'),
+    jsonStream = require('json-stream'),
     subscribeStream = require('../');
 
 test('do we work?', function (t) {
@@ -13,13 +14,17 @@ test('do we work?', function (t) {
     test: 'value',
     other: 'otherValue'
   };
+  var parser = jsonStream();
 
-  stream.on('readable', function () {
-    var obj = stream.read();
+  parser.on('readable', function () {
+    var obj = parser.read()
     t.deepEqual(obj, testObj);
     client.end();
     stream.close();
   });
+
+  stream.pipe(parser);
+
 
   setTimeout(function () {
     client.publish('hithere', JSON.stringify(testObj));

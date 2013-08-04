@@ -4,12 +4,12 @@
 
 [![NPM](https://nodei.co/npm/subscribe-stream.png)](https://nodei.co/npm/subscribe-stream/)
 
-A simple [Readable][Readable] object stream that consumes the data published to
+A simple [Readable][Readable] stream that consumes the data published to
 a specific `redis` [pub/sub][pubsub] channel using [`node_redis`][redis].
 
 __note__: We assume that it is a stringified json object coming through the
-pub/sub channel that is again parsed into an object because they are much nicer
-to deal with. This can be seen in the example below.
+pub/sub channel that then creates a stream of newline delimited objects. Use
+something like [json-stream][json-stream] to turn it into an object stream.
 
 This makes it especially useful for consuming [`godot`][godot] data sent using the `redis` reactor.
 
@@ -18,9 +18,11 @@ This makes it especially useful for consuming [`godot`][godot] data sent using t
 ```js
 
 var redis = require('redis'),
+    jsonStream = require('json-stream'),
     subscribeStream = require('../');
 
 var stream = subscribeStream({ subscription: 'hithere' });
+var parser = jsonStream();
 
 var client = redis.createClient();
 
@@ -29,10 +31,12 @@ var testObj = {
   other: 'otherValue'
 };
 
-stream.on('readable', function () {
+parser.on('readable', function () {
   var obj = stream.read();
   console.log('obj', obj);
 });
+
+stream.pipe(parser);
 
 client.publish('hithere', JSON.stringify(testObj));
 
@@ -54,3 +58,4 @@ MIT
 [Readable]: http://nodejs.org/api/stream.html#stream_class_stream_readable
 [redis]: https://github.com/mranney/node_redis
 [pubsub]: https://github.com/mranney/node_redis#publish--subscribe
+[json-stream]: https://github.com/mmalecki/json-stream

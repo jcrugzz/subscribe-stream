@@ -14,7 +14,7 @@ if (Readable === undefined) {
 }
 
 var SubscribeStream = function (options) {
-  Readable.call(this, { objectMode: true });
+  Readable.call(this);
 
   if(!options || !options.subscription) {
     throw new Error('This stream requires a channel to subscribe to');
@@ -48,7 +48,7 @@ util.inherits(SubscribeStream, Readable);
 SubscribeStream.prototype._read = function (n) {};
 
 SubscribeStream.prototype._onPublish = function (channel, message) {
-  this.push(JSON.parse(message));
+  this.push(message + '\n');
 };
 
 SubscribeStream.prototype.close = function () {

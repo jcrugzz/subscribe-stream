@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "tape": "~1.0.2",
-    "json-stream": "~0.2.0"
+    "json-stream": "~0.1.2"
   },
   "license": "MIT"
 }

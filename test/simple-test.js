@@ -16,9 +16,8 @@ test('do we work?', function (t) {
   };
   var parser = jsonStream();
 
-  parser.on('readable', function () {
-    var obj = parser.read()
-    t.deepEqual(obj, testObj);
+  parser.on('data', function (data) {
+    t.deepEqual(data, testObj);
     client.end();
     stream.close();
   });

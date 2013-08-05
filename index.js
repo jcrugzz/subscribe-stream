@@ -14,7 +14,7 @@ if (Readable === undefined) {
 }
 
 var SubscribeStream = function (options) {
-  Readable.call(this);
+  Readable.call(this, { encoding: 'utf8' });
 
   if(!options || !options.subscription) {
     throw new Error('This stream requires a channel to subscribe to');

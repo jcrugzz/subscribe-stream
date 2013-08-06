@@ -1,6 +1,6 @@
 {
   "name": "subscribe-stream",
-  "version": "0.0.4",
+  "version": "0.2.0",
   "description": "a simple Readable stream to consume JSON published over redis pub/sub",
   "author": "Jarrett Cruger <jcrugzz@gmail.com>",
   "keywords": [

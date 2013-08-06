@@ -10,7 +10,7 @@ var util = require('util'),
     redis = require('redis');
 
 if (Readable === undefined) {
-  Readable = require('readable-stream')
+  Readable = require('readable-stream');
 }
 
 var SubscribeStream = function (options) {
